@@ -1,0 +1,73 @@
+/**
+ * Momoc Document (.moc)
+ * VSCode拡張「Momoc」で作成されたGUIモックアップの定義ファイルです。
+ * 人間・GUI・AIエージェントが協調して開発を行うための統合データ形式です。
+ *
+ * ファイル構造:
+ *   本ファイルはTSX（TypeScript JSX）形式をベースとし、
+ *   メタデータと付箋メモをJSDocコメント内に、
+ *   エディタ内部状態をテンプレートリテラル変数に格納しています。
+ *   TSX部分はそのままReactコンポーネントとして読解可能です。
+ *
+ * 技術スタック:
+ *   CSS: Tailwind CSS v4（ユーティリティファーストCSS）
+ *   UIコンポーネント: shadcn/ui（Radix UI + Tailwind CSSベース）
+ *   importパス「@/components/ui/*」はshadcn/uiコンポーネントです。
+ *   導入先にTailwind CSSやshadcn/uiがない場合は、
+ *   導入先の技術スタックで同等の見た目・レイアウトを再現してください。
+ *
+ * SSOT（Single Source of Truth）:
+ *   GUIエディタの状態（craftState）が末尾のエディタデータに存在する場合、
+ *   TSXコードよりcraftStateが正となります。
+ *   TSXはcraftStateから自動生成される派生データであり、AIがページ構造を
+ *   読み取るための参照用です。コンポーネントの配置変更はGUIで行ってください。
+ *   (GUIで編集した場合、craftStateの内容がtsxにも上書きされます。)
+ *
+ * AI読み取り優先順位:
+ *   1. TSXコード（構造・レイアウトの主軸 読み手理解用）
+ *   2. craftState（GUIエディタの詳細プロパティ参照用）
+ *
+ * エディタデータ（末尾ブロック）:
+ *   Brotli圧縮+Base64エンコードされたGUIエディタの内部状態です。
+ *   AIエージェントはこのデータを直接読み取る必要はありません。
+ *   ページ構造の理解にはTSXコードと@moc-componentスキーマを使用してください。
+ *
+ * メタデータ:
+ *   @moc-version  - ドキュメント形式バージョン（必須）
+ *   @moc-intent   - このページの目的・意図（任意、人間が記述）
+ *   @moc-theme    - テーマ (light | dark)（任意、デフォルト: light）
+ *   @moc-layout   - レイアウトモード (flow | absolute)（任意、デフォルト: flow）
+ *   @moc-viewport - 対象ビューポート (desktop | tablet | mobile | WxH)（任意、デフォルト: desktop）
+ *
+ * AI指示メモ:
+ *   ユーザーがキャンバス上に配置した、AIエージェントへの指示付箋です。
+ *   @moc-memos ブロックにメモ一覧が記載されます（Title/Message形式）。
+ *   TSX内にも @moc-memo コメントとして各要素付近に記載されます。
+ *   AIはこのメモを読み取り、該当要素に対する修正・提案を行ってください。
+ *
+ * コンポーネントスキーマ（v1.1.0）:
+ *   @moc-component <コンポーネント名> <propsスキーマJSON>
+ *   このファイルで使用されているMomocコンポーネントのプロパティ定義です。
+ *   type: 受け付ける値の型または選択肢（A|B|C形式）、default: デフォルト値。
+ *   AIはcraftStateの各ノードのpropsをこの定義と照合して解釈してください。
+ *
+ * TSX内コメント規約:
+ *   @moc-node <nodeID>  - Craft.jsノードとの対応付け
+ *   @moc-role <役割>     - 要素の役割説明
+ *   @moc-memo <メモ>     - 付箋メモの概要
+ *
+ * @moc-version 1.2.1
+ * @moc-intent 
+ * @moc-theme light
+ * @moc-layout flow
+ * @moc-viewport desktop
+ * @moc-component CraftContainer {"displayName":"Container","props":{"display":{"type":"flex|grid","default":"flex"},"flexDirection":{"type":"row|column","default":"row"},"gap":{"type":"0|1|2|3|4|5|6|8|10|12|16|20|24","default":"4"},"gridCols":{"type":"number","default":3},"linkedMocPath":{"type":"string","default":""},"width":{"type":"string","default":"auto"},"height":{"type":"string","default":"auto"},"className":{"type":"string","default":""}}}
+ */
+
+/* @moc-tsx-start */
+export default function MockPage() {
+  return <div />;
+}
+/* @moc-tsx-end */
+
+const __mocEditorData = `brotli:G34BYIzTDfWiprpHAH8/yY9/1IofbyDRkTosfWPXtgOmajuqL4+yJnziUj0PIuLwjkTX1TeJ+df0Ml7cEoQavj5IjCemAzCxmpnKA2H39VnG+1lfw/jwGF+JmCa49srX4WssdvOXhkg+SgD4LMvxCZUIZxuOuytlRCuhfZwmPs0gQlIAjUkk2heDYGiL/foQr2KfC4eHLV988OFywfefcDgi1u5Bd6Xbh2M7lp/v/7Of74+FXw/UNVFkhP0C+5a3iqzB2jSz/w==`;
