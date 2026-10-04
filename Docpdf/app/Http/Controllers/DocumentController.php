@@ -77,24 +77,16 @@ class DocumentController extends Controller
     //データ削除
     public function destroy($id)
     {
-
-
         try {
             $document = Documents::findOrFail($id);
 
             $document->delete();
 
-            return redirect()
-                ->route('dashboard')
-                ->with('success', 'データを削除しました。');
+            return redirect()->route('dashboard')->with('success', 'データを削除しました。');
 
         } catch (\Exception $e) {
-
-            return redirect()
-                ->route('dashboard')
-                ->with('error', 'データの削除に失敗しました。');
+            return redirect()->route('dashboard')->with('error', 'データの削除に失敗しました。');
         }
-
     }
 
     //ドキュメントの検索

@@ -392,83 +392,126 @@
         <div class="col-md-9">
             <div class="settings-content">
                 <div class="tab-content">
-<div class="tab-pane fade show active"
-     id="account"
+                    <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+                        <div class="settings-title">アカウント設定</div>
+                        <div class="settings-description">
+                        プロフィール情報とログインパスワードを管理できます。
+                    </div>
+
+                    {{-- 現在のアカウント情報 --}}
+                    <div class="card border-0 bg-light mb-4">
+                        <div class="card-body">
+                            <div class="mb-2">
+                                <strong>名前：</strong>{{ Auth::user()->name }}
+                            </div>
+                            <div>
+                                <strong>メールアドレス：</strong>{{ Auth::user()->email }}
+                            </div>
+
+                            <a href="{{ route('profile.index') }}"
+                            class="btn btn-outline-primary btn-sm mt-3">
+                                プロフィール情報を編集
+                            </a>
+                        </div>
+                    </div>
+
+                    {{-- パスワード変更 --}}
+                    <h5 class="fw-bold mb-3">パスワード変更</h5>
+
+                    <form method="POST" action="{{ route('settings.password.update') }}">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="setting-section">
+                            <label for="current_password" class="form-label setting-label">
+                                現在のパスワード
+                            </label>
+                            <input type="password"
+                                name="current_password"
+                                id="current_password"
+                                class="form-control"
+                                autocomplete="current-password"
+                                required>
+                        </div>
+
+                        <div class="setting-section">
+                            <label for="password" class="form-label setting-label">
+                                新しいパスワード
+                            </label>
+                            <input type="password"
+                                name="password"
+                                id="password"
+                                class="form-control"
+                                autocomplete="new-password"
+                                required>
+                        </div>
+
+                        <div class="setting-section">
+                            <label for="password_confirmation" class="form-label setting-label">
+                                新しいパスワード（確認）
+                            </label>
+                            <input type="password"
+                                name="password_confirmation"
+                                id="password_confirmation"
+                                class="form-control"
+                                autocomplete="new-password"
+                                required>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary save-button">
+                                パスワードを変更
+                            </button>
+                        </div>
+                    </form>
+                </div>
+{{-- アカウント設定の tab-pane の後に置く --}}
+<div class="tab-pane fade"
+     id="data"
      role="tabpanel"
-     aria-labelledby="account-tab">
+     aria-labelledby="data-tab">
 
-    <div class="settings-title">アカウント設定</div>
+    <div class="settings-title">データ管理</div>
     <div class="settings-description">
-        プロフィール情報とログインパスワードを管理できます。
+        作成した契約書のデータを管理できます。
     </div>
 
-    {{-- 現在のアカウント情報 --}}
-    <div class="card border-0 bg-light mb-4">
-        <div class="card-body">
-            <div class="mb-2">
-                <strong>名前：</strong>{{ Auth::user()->name }}
-            </div>
-            <div>
-                <strong>メールアドレス：</strong>{{ Auth::user()->email }}
-            </div>
+    <div class="setting-section">
+        <h5 class="fw-bold">契約書データのエクスポート</h5>
+        <p class="text-secondary">
+            自分が作成した契約書をCSVファイルとしてダウンロードします。
+        </p>
 
-            <a href="{{ route('profile.index') }}"
-               class="btn btn-outline-primary btn-sm mt-3">
-                プロフィール情報を編集
-            </a>
-        </div>
+        <a href="{{ route('settings.document.export') }}"
+           class="btn btn-outline-primary">
+            CSVをダウンロード
+        </a>
     </div>
-
-    {{-- パスワード変更 --}}
-    <h5 class="fw-bold mb-3">パスワード変更</h5>
-
-    <form method="POST" action="{{ route('settings.password.update') }}">
-        @csrf
-        @method('PUT')
-
-        <div class="setting-section">
-            <label for="current_password" class="form-label setting-label">
-                現在のパスワード
-            </label>
-            <input type="password"
-                   name="current_password"
-                   id="current_password"
-                   class="form-control"
-                   autocomplete="current-password"
-                   required>
-        </div>
-
-        <div class="setting-section">
-            <label for="password" class="form-label setting-label">
-                新しいパスワード
-            </label>
-            <input type="password"
-                   name="password"
-                   id="password"
-                   class="form-control"
-                   autocomplete="new-password"
-                   required>
-        </div>
-
-        <div class="setting-section">
-            <label for="password_confirmation" class="form-label setting-label">
-                新しいパスワード（確認）
-            </label>
-            <input type="password"
-                   name="password_confirmation"
-                   id="password_confirmation"
-                   class="form-control"
-                   autocomplete="new-password"
-                   required>
-        </div>
-
-        <div class="text-end">
-            <button type="submit" class="btn btn-primary save-button">
-                パスワードを変更
-            </button>
-        </div>
-    </form>
 </div>
+
+
+<div class="tab-pane fade"
+     id="notification"
+     role="tabpanel"
+     aria-labelledby="notification-tab">
+通知するタイミング
+<select>
+<option>tes</option>
+<option>te</option>
+<option>tes</option>
+</select>
+</div>
+
+<div class="tab-content">
+    <div class="tab-pane fade show active" id="account">
+        {{-- 既存のアカウント設定 --}}
+    </div>
+
+    <div class="tab-pane fade" id="data">
+        {{-- 上記のデータ管理 --}}
+    </div>
+</div>
+                </div>
             </div>
         </div>
 

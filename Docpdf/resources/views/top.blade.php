@@ -41,7 +41,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('Login.top') }}">
+                        <a class="nav-link" href="#login">
                             ログイン
                         </a>
                     </li>
@@ -86,7 +86,7 @@
 
                     <div class="mt-4">
 
-                        <a href="{{ route('Docu.Gene') }}" class="text-decoration-none">
+                        <a href="{{ route('Docu.Gene') }}" class="btn btn-primary btn-lg me-2">
                             契約書を作成する
                         </a>
 
@@ -99,40 +99,46 @@
                 </div>
 
 
-                <!-- 右 -->
-                <div class="col-lg-6">
+                <!-- 右：ログインフォーム -->
+                <div class="col-lg-6" id="login">
 
-                    <div class="card shadow border-0">
+                    <div class="card shadow border-0 mx-auto" style="max-width: 460px;">
 
-                        <div class="card-body p-4">
+                        <div class="card-body p-4 p-md-5">
 
-                            <div class="bg-white border p-4">
+                            <h2 class="h3 fw-bold text-center mb-2">ログイン</h2>
+                            <p class="text-secondary text-center mb-4">アカウントにログインしてください。</p>
 
-                                <h4 class="text-center mb-4">
-                                    業務委託契約書
-                                </h4>
+                            <form action="{{ route('login') }}" method="POST">
+                                @csrf
 
-                                <p>
-                                    株式会社○○（以下「甲」という）と
-                                    山田太郎（以下「乙」という）は、
-                                    以下のとおり契約を締結する。
-                                </p>
-
-                                <hr>
-
-                                <p>
-                                    第1条（業務内容）
-                                </p>
-
-                                <p>
-                                    乙は甲から委託された業務を行う。
-                                </p>
-
-                                <div class="text-end mt-5">
-                                    2026年9月16日
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">メールアドレス</label>
+                                    <input type="email" class="form-control form-control-lg" id="email" name="email"
+                                        autocomplete="email" required>
                                 </div>
 
-                            </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">パスワード</label>
+                                    <input type="password" class="form-control form-control-lg" id="password" name="password"
+                                        autocomplete="current-password" required>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="remember" name="remember">
+                                        <label class="form-check-label" for="remember">ログイン状態を保持</label>
+                                    </div>
+                                    <a href="#" class="small">パスワードをお忘れですか？</a>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-lg w-100">ログイン</button>
+                            </form>
+
+                            <p class="text-center text-secondary mt-4 mb-0">
+                                アカウントをお持ちでない方は
+                                <a href="{{ route('register') }}">新規登録</a>
+                            </p>
 
                         </div>
 
@@ -340,7 +346,7 @@
                 ブラウザからすぐに作成できます。
             </p>
 
-            <a href="{{ route('Docu.Gene') }}" class="text-decoration-none">
+            <a href="{{ route('Docu.Gene') }}" class="btn btn-primary btn-lg">
                 契約書を作成
             </a>
 

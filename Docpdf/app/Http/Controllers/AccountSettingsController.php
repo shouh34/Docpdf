@@ -2,20 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Password;
+
 
 class AccountSettingsController extends Controller
 {
     //
 
-        public function updatePassword(Request $request)
+    public function updatePassword(Request $request)
     {
         $validated = $request->validate([
             'current_password' => ['required', 'current_password'],
             'password' => ['required', 'confirmed', Password::defaults()],
         ], [
-            'current_password.current_password' => '現在のパスワードが正しくありません。',
-            'password.confirmed' => '新しいパスワードが一致しません。',
+            'current_password.current_password' =>
+                '現在のパスワードが正しくありません。',
+            'password.confirmed' =>
+                '新しいパスワードが一致しません。',
         ]);
 
         $user = Auth::user();
@@ -24,5 +30,6 @@ class AccountSettingsController extends Controller
 
         return back()->with('success', 'パスワードを変更しました。');
     }
+
 
 }

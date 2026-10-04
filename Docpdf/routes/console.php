@@ -12,4 +12,4 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 
-Schedule::command('app:notify-ending-contracts')->dailyAt('22:42');
+Schedule::command('app:notify-ending-contracts')->dailyAt('09:09');

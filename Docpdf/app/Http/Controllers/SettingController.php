@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UserSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Users;
 
 class SettingController extends Controller
 {
@@ -105,5 +106,15 @@ class SettingController extends Controller
             'success',
             '設定を保存しました。'
         );
+    }
+
+
+
+    //エクスポート
+    public function export()
+    {
+
+
+    return "exportしました";
     }
 }

@@ -14,21 +14,12 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SharingController;
 use App\Http\Controllers\AccountSettingsController;
 use App\Http\Controllers\FriendController;
+
+
 // ==========================================
 // トップ画面
 // ==========================================
-
-// 未ログイン → トップ画面
-// ログイン済み → ダッシュボード
-Route::get('/', function () {
-
-    if (Auth::check()) {
-        return redirect()->route('dashboard');
-    }
-
-    return app(TopController::class)->top();
-
-})->name('top');
+Route::get('/', [TopController::class, 'top'])->name('top');
 
 
 // ==========================================
@@ -38,12 +29,9 @@ Route::get('/', function () {
 Route::middleware('guest')->group(function () {
 
     // ログイン画面
-    Route::get('/Login', [TopController::class, 'Login'])
-        ->name('Login.top');
-
+    Route::get('/Login', [TopController::class, 'Login'])->name('Login.top');
     // 新規登録画面
-    Route::get('/Register', [RegisterController::class, 'index'])
-        ->name('Register');
+    Route::get('/Register', [RegisterController::class, 'index'])->name('Register');
 
 });
 
@@ -60,9 +48,11 @@ Route::middleware('auth')->group(function () {
     // ダッシュボード
     // ------------------------------------------
 
-    Route::get('/Authenticated/Document/Generate',[DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/friends', [FriendController::class, 'index'])->name('friends.index');
+    Route::get('/Authenticated/Dashboard',[DashboardController::class, 'index'])->name('dashboard');
 
+    //承認済みの友達を表示
+    Route::get('/friends', [FriendController::class, 'index'])->name('friends.index');
+    //友達を申請
     Route::post('/friends', [FriendController::class, 'store'])->name('friends.store');
 
     Route::patch('/friendships/{friendship}/accept', [FriendController::class, 'accept'])->name('friendships.accept');
@@ -74,17 +64,11 @@ Route::middleware('auth')->group(function () {
     // ドキュメント保存
     Route::post('/Document/Generate/Save', [DocupdfController::class, 'SaveDocument'])->name('SaveDocument');
 
-Route::get('/friends/{friend}/documents', [FriendController::class, 'documents'])
-    ->name('friends.documents.index');
+    Route::get('/friends/{friend}/documents', [FriendController::class, 'documents'])->name('friends.documents.index');
 
-Route::get('/friends/{friend}/documents/{document}', [FriendController::class, 'showDocument'])
-    ->name('friends.documents.show');
-    // ------------------------------------------
-    // 保存したドキュメント
-    // ------------------------------------------
+    Route::get('/friends/{friend}/documents/{document}', [FriendController::class, 'showDocument'])->name('friends.documents.show');
 
-      Route::put('/settings/password', [AccountSettingsController::class, 'updatePassword'])
-        ->name('settings.password.update');
+    Route::put('/settings/password', [AccountSettingsController::class, 'updatePassword'])->name('settings.password.update');
 
     // ドキュメント一覧
     Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
@@ -100,41 +84,41 @@ Route::get('/friends/{friend}/documents/{document}', [FriendController::class, '
 
 
     //共有
-Route::get('/documents/share/{document}', [SharingController::class, 'index'])
-    ->name('documents.share');
+    Route::get('/documents/share/{document}', [SharingController::class, 'index'])->name('documents.share');
+
+
+
 
     // ------------------------------------------
     // 設定
     // ------------------------------------------
 
+    //設定を表示
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
 
+    //データ管理タブ
+    Route::get('/settings/document/export', [SettingController::class, 'export'])->name('settings.document.export');
+
+    //エディタタブ
+    //エディタの設定を更新
     Route::put('/settings/editor', [SettingController::class, 'updateEditor'])->name('settings.editor.update');
 
+    //ドキュメントの
     Route::put('/settings/document', [SettingController::class, 'updateDocument'])->name('settings.document.update');
 
+    //アカウント情報を更新
+    Route::put('/settings/account/profile', [AccountController::class, 'updateProfile'])->name('account.profile.update');
 
-    // ------------------------------------------
-    // アカウント
-    // ------------------------------------------
+    Route::post('/settings/account/profile-image', [AccountController::class, 'updateProfileImage'])->name('account.profile-image');
 
-    Route::put('/account/profile', [AccountController::class, 'updateProfile'])
-        ->name('account.profile.update');
-
-    Route::post('/account/profile-image', [AccountController::class, 'updateProfileImage'])
-        ->name('account.profile-image');
-
-Route::patch('/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])
-    ->middleware('auth')
-    ->name('notifications.read');
+    Route::patch('/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->middleware('auth')->name('notifications.read');
 
 
     // ------------------------------------------
     // プロフィール
     // ------------------------------------------
 
-    Route::get('/profile', [ProfileController::class, 'index'])
-        ->name('profile.index');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 });
 
 

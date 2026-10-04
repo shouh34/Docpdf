@@ -36,6 +36,9 @@ class Documents extends Model
         'amount' => 'decimal:2',
     ];
 
+
+
+    // 新しい文書を保存する直前に、UUIDがなければ生成
     protected static function booted(): void
     {
         static::creating(function ($document) {
@@ -43,6 +46,8 @@ class Documents extends Model
         });
     }
 
+
+    // ルートモデルバインディングで、検索に使うカラムを uuid に指定
     public function getRouteKeyName(): string
     {
         return 'uuid';
